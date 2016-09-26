@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,7 +19,7 @@ import alexeychurchill.github.io.bresenhamlines.graphics.primitives.Drawing;
 import alexeychurchill.github.io.bresenhamlines.graphics.parsers.FileParser;
 import alexeychurchill.github.io.bresenhamlines.views.RenderView;
 
-public class MainActivity extends AppCompatActivity implements View.OnLongClickListener {
+public class MainActivity extends AppCompatActivity {
     private static final int RC_OPEN_FILE = 1;
     private RenderView mRVField;
 
@@ -26,12 +28,27 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRVField = ((RenderView) findViewById(R.id.rvField));
-        mRVField.setOnLongClickListener(this);
     }
 
     public void onOpenFile() {
         Intent fileOpenIntent = new Intent(this, OpenFileActivity.class);
         startActivityForResult(fileOpenIntent, RC_OPEN_FILE);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.miMainOpen:
+                onOpenFile();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -78,15 +95,5 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         mRVField.getDrawings().clear();
         mRVField.getDrawings().add(parsedDrawing);
         mRVField.setRenderThreadPaused(false);
-    }
-
-    @Override
-    public boolean onLongClick(View v) {
-        switch (v.getId()) {
-            case R.id.rvField:
-                onOpenFile();
-                return true;
-        }
-        return false;
     }
 }

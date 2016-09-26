@@ -2,4 +2,6 @@
     <string name="app_name">Bresenham Lines</string>
     <string name="text_wrong_file">Wrong file!</string>
     <string name="text_file_error">File error!</string>
+    <string name="menu_text_open">Open file...</string>
+    <string name="menu_text_transform">Transform</string>
 </resources>
