@@ -1,22 +1,16 @@
 package alexeychurchill.github.io.bresenhamlines.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import alexeychurchill.github.io.bresenhamlines.R;
 import alexeychurchill.github.io.bresenhamlines.filebrowser.OpenFileActivity;
-import alexeychurchill.github.io.bresenhamlines.graphics.primitives.Drawing;
 import alexeychurchill.github.io.bresenhamlines.graphics.parsers.FileParser;
+import alexeychurchill.github.io.bresenhamlines.graphics.primitives.Drawing;
 import alexeychurchill.github.io.bresenhamlines.views.RenderView;
 
 public class MainActivity extends AppCompatActivity {
