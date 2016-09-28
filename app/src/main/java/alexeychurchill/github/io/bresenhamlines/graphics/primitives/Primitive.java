@@ -34,7 +34,7 @@ public abstract class Primitive implements Raster {
     public Point transformPoint(Point point) {
         Point newPoint = point;
         for (Transform transform : transforms) {
-            newPoint = transform.transform(point);
+            newPoint = transform.transform(newPoint);
         }
         return newPoint;
     }
