@@ -1,5 +1,7 @@
 package alexeychurchill.github.io.bresenhamlines.graphics.primitives;
 
+import android.graphics.Color;
+
 import java.security.PublicKey;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +17,7 @@ import alexeychurchill.github.io.bresenhamlines.graphics.transforms.Transform;
 public abstract class Primitive implements Raster {
     private List<Transform> transforms = new LinkedList<>();
 
-    private int color;
+    private int color = Color.BLACK;
 
     public int getColor() {
         return color;
