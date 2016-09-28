@@ -1,4 +1,4 @@
-package alexeychurchill.github.io.bresenhamlines.graphics.matrix;
+package alexeychurchill.github.io.bresenhamlines.graphics.transforms;
 
 import java.util.Arrays;
 

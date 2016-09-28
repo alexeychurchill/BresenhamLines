@@ -24,6 +24,8 @@ public class Drawing extends Primitive {
         }
         List<Point> rasterPoints = new ArrayList<>();
         for (Primitive primitive : primitives) {
+            primitive.getTransforms().clear();
+            primitive.getTransforms().addAll(getTransforms());
             rasterPoints.addAll(primitive.getRasterPoints());
         }
         return rasterPoints;

@@ -45,7 +45,7 @@ public class Point extends Primitive {
 
     @Override
     public List<Point> getRasterPoints() {
-        return new ArrayList<>(Collections.singletonList(this));
+        return new ArrayList<>(Collections.singletonList(transformPoint(this)));
     }
 
     @Override

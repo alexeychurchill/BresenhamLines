@@ -22,7 +22,7 @@ public abstract class Line extends Primitive {
         List<Point> linePoints = getLinePoints();
         if (linePoints != null) {
             for (int i = 0; i < linePoints.size() - 1; i++) {
-                List<Point> bresenhamResult = getBresenham(linePoints.get(i), linePoints.get(i + 1));
+                List<Point> bresenhamResult = getBresenham(transformPoint(linePoints.get(i)), transformPoint(linePoints.get(i + 1)));
                 if (bresenhamResult != null) {
                     rasterPoints.addAll(bresenhamResult);
                 }
