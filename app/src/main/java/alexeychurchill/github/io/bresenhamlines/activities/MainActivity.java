@@ -11,6 +11,8 @@ import alexeychurchill.github.io.bresenhamlines.R;
 import alexeychurchill.github.io.bresenhamlines.filebrowser.OpenFileActivity;
 import alexeychurchill.github.io.bresenhamlines.graphics.parsers.FileParser;
 import alexeychurchill.github.io.bresenhamlines.graphics.primitives.Drawing;
+import alexeychurchill.github.io.bresenhamlines.graphics.primitives.Point;
+import alexeychurchill.github.io.bresenhamlines.graphics.transforms.Rotate;
 import alexeychurchill.github.io.bresenhamlines.graphics.transforms.Scale;
 import alexeychurchill.github.io.bresenhamlines.graphics.transforms.Translate;
 import alexeychurchill.github.io.bresenhamlines.views.RenderView;
@@ -20,16 +22,14 @@ public class MainActivity extends AppCompatActivity {
     private RenderView mRVField;
     private Translate mTranslate = new Translate();
     private Scale mScale = new Scale();
+    private Rotate mRotate = new Rotate();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRVField = ((RenderView) findViewById(R.id.rvField));
-        mTranslate.setTranslationX(300);
-        mTranslate.setTranslationY(200);
-        mScale.setScaleByX(0.5);
-        mScale.setScaleByY(1.5);
+        mRotate.setCenterPoint(new Point(0, 0));
     }
 
     public void onOpenFile() {
@@ -93,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
         if (parsedDrawing == null) {
             return;
         }
-        parsedDrawing.getTransforms().add(mTranslate);
         parsedDrawing.getTransforms().add(mScale);
+        parsedDrawing.getTransforms().add(mTranslate);
+        parsedDrawing.getTransforms().add(mRotate);
         mRVField.setRenderThreadPaused(true);
         mRVField.getDrawings().clear();
         mRVField.getDrawings().add(parsedDrawing);
