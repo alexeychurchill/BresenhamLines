@@ -16,4 +16,5 @@
     <string name="text_red">Red</string>
     <string name="text_green">Green</string>
     <string name="text_blue">Blue</string>
+    <string name="dialog_choose_color_title">Choose color</string>
 </resources>

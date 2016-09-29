@@ -1,13 +1,16 @@
 package alexeychurchill.github.io.bresenhamlines.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import alexeychurchill.github.io.bresenhamlines.R;
+import alexeychurchill.github.io.bresenhamlines.dialogs.ColorPickerDialogFragment;
 import alexeychurchill.github.io.bresenhamlines.filebrowser.OpenFileActivity;
 import alexeychurchill.github.io.bresenhamlines.graphics.parsers.FileParser;
 import alexeychurchill.github.io.bresenhamlines.graphics.primitives.Drawing;
@@ -17,13 +20,14 @@ import alexeychurchill.github.io.bresenhamlines.graphics.transforms.Scale;
 import alexeychurchill.github.io.bresenhamlines.graphics.transforms.Translate;
 import alexeychurchill.github.io.bresenhamlines.views.RenderView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ColorPickerDialogFragment.OnColorChosenListener {
     private static final int RC_OPEN_FILE = 1;
     private static final int RC_TRANSFORMS_SETTING = 2;
     private RenderView mRVField;
     private Translate mTranslate = new Translate();
     private Scale mScale = new Scale();
     private Rotate mRotate = new Rotate();
+    private int mColor = Color.BLACK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +57,18 @@ public class MainActivity extends AppCompatActivity {
             case R.id.miMainTransform:
                 onTransformsSetting();
                 break;
+            case R.id.miMainColor:
+                onColorChange();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onColorChange() {
+        ColorPickerDialogFragment colorPickerDialog = new ColorPickerDialogFragment();
+        colorPickerDialog.setListener(this);
+        colorPickerDialog.setColor(mColor);
+        colorPickerDialog.show(getSupportFragmentManager(), "ColorPickerDialogFragment");
     }
 
     private void onTransformsSetting() {
@@ -128,9 +142,18 @@ public class MainActivity extends AppCompatActivity {
         parsedDrawing.getTransforms().add(mScale);
         parsedDrawing.getTransforms().add(mTranslate);
         parsedDrawing.getTransforms().add(mRotate);
+        parsedDrawing.setColor(mColor);
         mRVField.setRenderThreadPaused(true);
         mRVField.getDrawings().clear();
         mRVField.getDrawings().add(parsedDrawing);
         mRVField.setRenderThreadPaused(false);
+    }
+
+    @Override
+    public void onColorChosen(DialogFragment dialog, int color) {
+        mColor = color;
+        for (Drawing drawing : mRVField.getDrawings()) {
+            drawing.setColor(color);
+        }
     }
 }

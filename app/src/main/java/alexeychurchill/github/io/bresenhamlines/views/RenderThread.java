@@ -34,10 +34,10 @@ public class RenderThread extends Thread {
         while (running) {
             //Rendering
             synchronized (this) {
-                if (surfaceHolder == null) {
+                if (paused) {
                     continue;
                 }
-                if (paused) {
+                if (surfaceHolder == null) {
                     continue;
                 }
                 try {
@@ -85,7 +85,7 @@ public class RenderThread extends Thread {
         this.bgColor = bgColor;
     }
 
-    public synchronized List<Drawing> getDrawings() {
+    public List<Drawing> getDrawings() {
         return drawings;
     }
 

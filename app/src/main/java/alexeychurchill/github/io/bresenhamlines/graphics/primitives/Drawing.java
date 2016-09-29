@@ -26,6 +26,7 @@ public class Drawing extends Primitive {
         for (Primitive primitive : primitives) {
             primitive.getTransforms().clear();
             primitive.getTransforms().addAll(getTransforms());
+            primitive.setColor(getColor());
             rasterPoints.addAll(primitive.getRasterPoints());
         }
         return rasterPoints;
