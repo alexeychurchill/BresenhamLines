@@ -19,6 +19,7 @@ import alexeychurchill.github.io.bresenhamlines.views.RenderView;
 
 public class MainActivity extends AppCompatActivity {
     private static final int RC_OPEN_FILE = 1;
+    private static final int RC_TRANSFORMS_SETTING = 2;
     private RenderView mRVField;
     private Translate mTranslate = new Translate();
     private Scale mScale = new Scale();
@@ -49,8 +50,23 @@ public class MainActivity extends AppCompatActivity {
             case R.id.miMainOpen:
                 onOpenFile();
                 break;
+            case R.id.miMainTransform:
+                onTransformsSetting();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onTransformsSetting() {
+        Intent intent = new Intent(this, TransformsActivity.class);
+        intent.putExtra(TransformsActivity.EXTRA_TRANSLATE_X, mTranslate.getTranslationX());
+        intent.putExtra(TransformsActivity.EXTRA_TRANSLATE_Y, mTranslate.getTranslationY());
+        intent.putExtra(TransformsActivity.EXTRA_SCALE_X, mScale.getScaleByX());
+        intent.putExtra(TransformsActivity.EXTRA_SCALE_Y, mScale.getScaleByY());
+        intent.putExtra(TransformsActivity.EXTRA_ROTATION, mRotate.getRotationDegree());
+        intent.putExtra(TransformsActivity.EXTRA_ROTATION_C_X, mRotate.getCenterPoint().getX());
+        intent.putExtra(TransformsActivity.EXTRA_ROTATION_C_Y, mRotate.getCenterPoint().getY());
+        startActivityForResult(intent, RC_TRANSFORMS_SETTING);
     }
 
     @Override
@@ -60,6 +76,22 @@ public class MainActivity extends AppCompatActivity {
                 case RC_OPEN_FILE:
                     if (data != null) {
                         openFile(data.getStringExtra(OpenFileActivity.EXTRA_FILENAME));
+                    }
+                    break;
+                case RC_TRANSFORMS_SETTING:
+                    if (data != null) {
+                        mRVField.setRenderThreadPaused(true);
+                        //Translate
+                        mTranslate.setTranslationX(data.getIntExtra(TransformsActivity.EXTRA_TRANSLATE_X, mTranslate.getTranslationX()));
+                        mTranslate.setTranslationY(data.getIntExtra(TransformsActivity.EXTRA_TRANSLATE_Y, mTranslate.getTranslationY()));
+                        //Scale
+                        mScale.setScaleByX(data.getDoubleExtra(TransformsActivity.EXTRA_SCALE_X, mScale.getScaleByX()));
+                        mScale.setScaleByY(data.getDoubleExtra(TransformsActivity.EXTRA_SCALE_Y, mScale.getScaleByY()));
+                        //Rotate
+                        mRotate.setRotationDegree(data.getDoubleExtra(TransformsActivity.EXTRA_ROTATION, mRotate.getRotationDegree()));
+                        mRotate.getCenterPoint().setX(data.getIntExtra(TransformsActivity.EXTRA_ROTATION_C_X, mRotate.getCenterPoint().getX()));
+                        mRotate.getCenterPoint().setY(data.getIntExtra(TransformsActivity.EXTRA_ROTATION_C_Y, mRotate.getCenterPoint().getX()));
+                        mRVField.setRenderThreadPaused(false);
                     }
                     break;
             }

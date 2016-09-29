@@ -5,6 +5,7 @@ import alexeychurchill.github.io.bresenhamlines.graphics.primitives.Point;
 
 public class Rotate extends Transform {
     private Point mCenterPoint = null;
+    private double angle = 0.0;
 
     public Rotate() {
         getTransformMatrix().set(2, 2, 1.0);
@@ -12,6 +13,7 @@ public class Rotate extends Transform {
     }
 
     public void setRotation(double angle) {
+        this.angle = angle;
         double sinA = Math.sin(-angle);
         double cosA = Math.cos(-angle);
         getTransformMatrix().set(0, 0, cosA);
@@ -44,5 +46,13 @@ public class Rotate extends Transform {
         result.setX(result.getX() + mCenterPoint.getX());
         result.setY(result.getY() + mCenterPoint.getY());
         return result;
+    }
+
+    public double getRotationDegree() {
+        return (getRotation() / Math.PI * 180.0);
+    }
+
+    public double getRotation() {
+        return angle;
     }
 }

@@ -9,4 +9,8 @@
         android:title="@string/menu_text_transform"
         android:icon="@drawable/ic_translate"
         app:showAsAction="ifRoom"/>
+    <item android:id="@+id/miMainColor"
+        android:title="@string/menu_text_color"
+        android:icon="@drawable/ic_palette"
+        app:showAsAction="ifRoom"/>
 </menu>

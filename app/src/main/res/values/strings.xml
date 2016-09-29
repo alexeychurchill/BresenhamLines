@@ -2,6 +2,15 @@
     <string name="app_name">Bresenham Lines</string>
     <string name="text_wrong_file">Wrong file!</string>
     <string name="text_file_error">File error!</string>
-    <string name="menu_text_open">Open file...</string>
+    <string name="menu_text_open">Open file…</string>
     <string name="menu_text_transform">Transform</string>
+    <string name="menu_text_color">Choose color</string>
+    <string name="text_trans_x">Translation by X</string>
+    <string name="text_trans_y">Translation by Y</string>
+    <string name="text_scale_x">Scale by X</string>
+    <string name="text_scale_y">Scale by Y</string>
+    <string name="text_rotation">Rotation</string>
+    <string name="text_ok">OK</string>
+    <string name="text_rot_c_x">Rotation center X</string>
+    <string name="text_rot_c_y">Rotation center Y</string>
 </resources>
